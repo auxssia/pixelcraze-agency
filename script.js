@@ -21,9 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
@@ -32,10 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            // If the element is intersecting (in view), add the 'visible' class
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: stop observing once it's visible to save resources
-                revealObserver.unobserve(entry.target); 
+            } 
+            // Otherwise (out of view), remove the 'visible' class to reset the animation
+            else {
+                entry.target.classList.remove('visible');
             }
         });
     }, {

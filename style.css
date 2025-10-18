@@ -150,6 +150,22 @@ p {
     color: var(--primary-text-color);
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: var(--secondary-text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-text-color);
+}
+
 .cta-nav {
     background: var(--accent-color);
     color: #fff;
@@ -330,6 +346,7 @@ section {
 .plan-features {
     list-style: none;
     margin-bottom: 2rem;
+    text-align: left;
 }
 
 .plan-features li {
@@ -500,4 +517,158 @@ section {
     .about-cards {
         grid-template-columns: 1fr;
     }
+}
+/* --- Styles for the ₹499 Offer / Demo Page --- */
+
+/* New color palette for the offer page */
+.offer-page {
+    --bg-color: #ffffff;
+    --primary-text-color: #1a1a1a;
+    --secondary-text-color: #555555;
+    --accent-color: #ff6b6b; /* A new, warm accent color */
+    --accent-gradient: linear-gradient(90deg, #ff8e53, #ff6b6b);
+    --card-bg-color: #f9f9f9;
+    --border-color: #e0e0e0;
+}
+
+/* Light theme adjustments */
+.offer-page .header-light {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+.offer-page .logo-light { color: var(--primary-text-color); }
+.offer-page .nav-link-light { color: var(--secondary-text-color); }
+.offer-page .nav-link-light:hover { color: var(--primary-text-color); }
+.offer-page .footer-light { border-top: 1px solid var(--border-color); }
+.offer-page .footer-light p, .offer-page .footer-light a { color: var(--secondary-text-color); }
+
+/* Top Banner */
+.sample-banner {
+    background: var(--accent-gradient);
+    color: #fff;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+    z-index: 101; /* Above the header */
+}
+.sample-banner p { color: #fff; margin: 0; }
+
+/* Offer Hero Section */
+.offer-hero {
+    padding: 8rem 0 4rem 0;
+    text-align: center;
+}
+.offer-headline {
+    font-size: 3rem;
+    color: var(--primary-text-color);
+    margin-bottom: 1rem;
+}
+.offer-subheadline {
+    font-size: 1.25rem;
+    color: var(--secondary-text-color);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Sample Website Container */
+.sample-website-container {
+    max-width: 900px;
+    margin: 0 auto 4rem auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    background-color: #fff;
+    overflow: hidden;
+}
+.sample-header {
+    background-color: var(--card-bg-color);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.sample-header h3 {
+    margin: 0;
+    color: var(--primary-text-color);
+}
+.sample-content {
+    padding: 2rem;
+}
+.sample-content h4 {
+    font-size: 1.5rem;
+    color: var(--primary-text-color);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+}
+.sample-content p {
+    color: var(--secondary-text-color);
+    margin-bottom: 2rem;
+}
+
+/* Upgrade Nudge Box */
+.upgrade-nudge {
+    background-color: #fff9e6;
+    border: 1px solid #ffeccc;
+    border-left: 4px solid #ffc107;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+.upgrade-nudge p {
+    margin: 0;
+    color: #856404;
+    font-size: 0.95rem;
+}
+.upgrade-nudge a {
+    color: #856404;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* Upsell Section */
+.upsell-section {
+    background-color: var(--card-bg-color);
+    text-align: center;
+    padding: 6rem 0;
+}
+.section-title-light {
+    color: var(--primary-text-color);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.section-title-light span {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.upsell-subtext {
+    max-width: 700px;
+    margin: 0 auto 2.5rem auto;
+    color: var(--secondary-text-color);
+    font-size: 1.1rem;
+}
+
+/* Final CTA Buttons */
+.final-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.primary-cta {
+    background: var(--accent-gradient);
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+}
+.secondary-cta {
+    background: #fff;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+.secondary-cta:hover {
+    background: var(--accent-color);
+    color: #fff;
 }
