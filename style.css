@@ -1,674 +1,591 @@
-/* --- Global Styles & Variables --- */
-:root {
-    --bg-color: #0a0a0a;
-    --primary-text-color: #f0f0f0;
-    --secondary-text-color: #a0a0a0;
-    --accent-color: #007BFF;
-    --accent-gradient: linear-gradient(90deg, #007BFF, #00C6FF);
-    --card-bg-color: #1a1a1a;
-    --border-color: #2a2a2a;
-    --font-family: 'Inter', sans-serif;
+/* ... existing code ... */
+.secondary-cta:hover {
+    background: var(--accent-color);
+    color: #fff;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* --- Styles for Meta Ads Page --- */
+
+/* 1. Root Variables & Font Setup */
+.ads-page {
+    /* New Dark Theme Palette */
+    --bg-dark: #111827;      /* Main background (cool dark blue) */
+    --card-dark: #1F2937;    /* Card background (slightly lighter) */
+    --accent-green: #10B981; /* Vibrant Green for CTAs & accents */
+    --text-header: #FFFFFF;
+    --text-body: #9CA3AF;     /* Light gray for body text */
+    --border-dark: #374151;   /* Subtle borders */
+    --dark-blue: #1F2937;     /* Re-using for consistency */
+
+    /* Typography */
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-body);
 }
 
-html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--primary-text-color);
-    font-family: var(--font-family);
-    line-height: 1.6;
-    overflow-x: hidden;
-    cursor: none; /* Hide default cursor */
-}
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #00C6FF;
-}
-
-h1, h2, h3 {
-    line-height: 1.2;
+.ads-page h1,
+.ads-page h2,
+.ads-page h3,
+.ads-page h4 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-header);
     font-weight: 700;
 }
 
-h1 { font-size: 3.5rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.5rem; }
-
-p {
-    color: var(--secondary-text-color);
-    margin-bottom: 1rem;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-/* --- Custom Cursor --- */
-.cursor-dot, .cursor-outline {
-    pointer-events: none;
+/* 2. Header & Navigation */
+.ads-page .ads-header {
+    background-color: rgba(17, 24, 39, 0.8); /* Dark blur */
+    border-bottom: 1px solid var(--border-dark);
+    padding: 1rem 0;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    z-index: 9999;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.ads-page .logo-ads {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-header);
+    text-decoration: none;
+}
+.ads-page .nav-link-ads {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--text-body);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.ads-page .nav-link-ads:hover {
+    color: var(--text-header);
+}
+.ads-page .cta-nav-ads {
+    background-color: var(--accent-green);
+    color: var(--text-header);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.ads-page .cta-nav-ads:hover {
+    background-color: #059669; /* Darker green */
 }
 
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--accent-color);
+/* 3. Hero Section */
+.ads-page .hero-ads {
+    position: relative;
+    padding: 14rem 0 10rem 0; /* More padding */
+    text-align: center;
+    overflow: hidden;
+    color: var(--text-header);
 }
-
-.cursor-outline {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 123, 255, 0.2);
-    transition: all 0.08s ease-out;
-}
-
-/* Hide cursor on mobile */
-@media (max-width: 768px) {
-    .cursor-dot, .cursor-outline { display: none; }
-    body { cursor: auto; }
-}
-
-
-/* --- Floating Shapes Background --- */
-.shapes-container {
-    position: fixed;
+.ads-page .video-background {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-    pointer-events: none;
-    overflow: hidden;
+    z-index: 1;
+    opacity: 0.1; /* Reduced opacity */
 }
-
-.shape {
-    position: absolute;
-    background: var(--accent-gradient);
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: float 20s infinite linear;
-}
-
-.shape-1 { width: 200px; height: 200px; top: 10%; left: 5%; animation-duration: 25s; }
-.shape-2 { width: 100px; height: 100px; top: 70%; left: 80%; animation-duration: 18s; }
-.shape-3 { width: 150px; height: 150px; top: 40%; left: 40%; animation-duration: 22s; filter: blur(20px); }
-
-@keyframes float {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-30px) rotate(180deg); }
-    100% { transform: translateY(0) rotate(360deg); }
-}
-
-/* --- Header --- */
-.header {
-    position: fixed;
+.ads-page .video-background video {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ads-page .hero-ads::before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: 100;
-    padding: 1rem 0;
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    height: 100%;
+    /* Stronger gradient overlay */
+    background: linear-gradient(rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.8));
+    z-index: 2;
 }
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--primary-text-color);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.nav-link {
-    color: var(--secondary-text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: var(--primary-text-color);
-}
-
-.cta-nav {
-    background: var(--accent-color);
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: transform 0.2s ease;
-}
-.cta-nav:hover {
-    transform: scale(1.05);
-    color: #fff;
-}
-
-
-/* --- Hero Section --- */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding-top: 80px; /* Offset for fixed header */
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.headline {
-    font-weight: 900;
-    margin-bottom: 1rem;
-}
-
-.subheadline {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    color: var(--secondary-text-color);
-}
-
-.cta-button {
-    display: inline-block;
-    background: var(--accent-gradient);
-    color: #fff;
-    padding: 1rem 2.5rem;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0, 123, 255, 0.4);
-    color: #fff;
-}
-
-/* --- General Section Styling --- */
-section {
-    padding: 6rem 0;
-}
-
-/* --- About Section --- */
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.about-text h2 {
-    margin-bottom: 1rem;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.about-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.card {
-    background: var(--card-bg-color);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
-}
-
-.card-icon {
-    width: 48px;
-    height: 48px;
-    background: var(--accent-gradient);
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-.card-icon svg {
-    width: 24px;
-    height: 24px;
-}
-.card h3 {
-    margin-bottom: 0.5rem;
-}
-
-/* --- Plans Section --- */
-.plans {
-    background-color: var(--bg-color);
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.plans-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-.plan-card {
-    background: var(--card-bg-color);
-    padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    text-align: center;
-    transition: transform 0.3s ease;
+.ads-page .hero-content-ads {
     position: relative;
-    overflow: hidden;
+    z-index: 3;
 }
-
-.plan-card:hover {
-    transform: translateY(-10px);
-}
-
-.plan-card.featured {
-    border-color: var(--accent-color);
-    transform: scale(1.05);
-}
-
-.featured-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: var(--accent-gradient);
-    color: #fff;
-    padding: 0.5rem 2rem;
-    font-size: 0.8rem;
-    font-weight: bold;
-    transform: rotate(45deg) translate(25%, -25%);
-    transform-origin: center;
-}
-
-.plan-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.plan-price {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--primary-text-color);
+.ads-page .hero-ads h1 {
+    font-size: 3.8rem; /* Larger */
+    color: var(--text-header);
     margin-bottom: 1.5rem;
 }
-
-.plan-features {
-    list-style: none;
-    margin-bottom: 2rem;
-    text-align: left;
-}
-
-.plan-features li {
-    padding: 0.5rem 0;
-    color: var(--secondary-text-color);
-    border-bottom: 1px solid var(--border-color);
-}
-.plan-features li:last-child {
-    border-bottom: none;
-}
-
-.plan-button {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    border-radius: 8px;
-    background-color: var(--accent-color);
-    color: #fff;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.plan-button:hover {
-    background-color: #0056b3;
-    color: #fff;
-}
-
-.plan-card.featured .plan-button {
-    background: var(--accent-gradient);
-}
-
-
-/* --- Contact Section --- */
-.contact {
-    text-align: center;
-}
-
-.contact-title {
-    font-size: 3rem;
-    max-width: 600px;
-    margin: 0 auto 1rem;
-}
-
-.contact-subtitle {
+.ads-page .hero-ads p {
     font-size: 1.25rem;
-    margin-bottom: 2.5rem;
-}
-
-.whatsapp-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: #25D366;
-    color: #fff;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    font-weight: 700;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
-    color: #fff;
-}
-.whatsapp-button svg {
-    width: 24px;
-    height: 24px;
-}
-
-.social-icons {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-}
-
-.social-icons a {
-    color: var(--secondary-text-color);
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: var(--primary-text-color);
-    transform: translateY(-3px);
-}
-.social-icons svg {
-    width: 28px;
-    height: 28px;
-}
-
-/* --- Footer --- */
-.footer {
-    padding: 2rem 0;
-    border-top: 1px solid var(--border-color);
-    text-align: center;
-}
-
-.footer p {
-    color: var(--secondary-text-color);
-    margin: 0;
-}
-
-.heart {
-    color: var(--accent-color);
-    transition: transform 0.2s ease;
-    display: inline-block;
-}
-
-.footer:hover .heart {
-    transform: scale(1.3);
-}
-
-
-/* --- Animations --- */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInAnimation 0.8s ease-out forwards;
-}
-
-.fade-in:nth-child(1) { animation-delay: 0.2s; }
-.fade-in:nth-child(2) { animation-delay: 0.4s; }
-.fade-in:nth-child(3) { animation-delay: 0.6s; }
-
-.reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fadeInAnimation {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- Responsive Design --- */
-@media (max-width: 992px) {
-    .plans-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    .plan-card.featured {
-        transform: scale(1);
-    }
-    .about-content {
-        grid-template-columns: 1fr;
-    }
-    .about-text {
-        text-align: center;
-    }
-}
-
-@media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    .contact-title { font-size: 2.2rem; }
-    
-    .about-cards {
-        grid-template-columns: 1fr;
-    }
-}
-/* --- Styles for the ₹499 Offer / Demo Page --- */
-
-/* New color palette for the offer page */
-.offer-page {
-    --bg-color: #ffffff;
-    --primary-text-color: #1a1a1a;
-    --secondary-text-color: #555555;
-    --accent-color: #ff6b6b; /* A new, warm accent color */
-    --accent-gradient: linear-gradient(90deg, #ff8e53, #ff6b6b);
-    --card-bg-color: #f9f9f9;
-    --border-color: #e0e0e0;
-}
-
-/* Light theme adjustments */
-.offer-page .header-light {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-}
-.offer-page .logo-light { color: var(--primary-text-color); }
-.offer-page .nav-link-light { color: var(--secondary-text-color); }
-.offer-page .nav-link-light:hover { color: var(--primary-text-color); }
-.offer-page .footer-light { border-top: 1px solid var(--border-color); }
-.offer-page .footer-light p, .offer-page .footer-light a { color: var(--secondary-text-color); }
-
-/* Top Banner */
-.sample-banner {
-    background: var(--accent-gradient);
-    color: #fff;
-    text-align: center;
-    padding: 0.75rem 1rem;
-    font-weight: 500;
-    position: sticky;
-    top: 0;
-    z-index: 101; /* Above the header */
-}
-.sample-banner p { color: #fff; margin: 0; }
-
-/* Offer Hero Section */
-.offer-hero {
-    padding: 8rem 0 4rem 0;
-    text-align: center;
-}
-.offer-headline {
-    font-size: 3rem;
-    color: var(--primary-text-color);
-    margin-bottom: 1rem;
-}
-.offer-subheadline {
-    font-size: 1.25rem;
-    color: var(--secondary-text-color);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Sample Website Container */
-.sample-website-container {
-    max-width: 900px;
-    margin: 0 auto 4rem auto;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-    background-color: #fff;
-    overflow: hidden;
-}
-.sample-header {
-    background-color: var(--card-bg-color);
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border-color);
-}
-.sample-header h3 {
-    margin: 0;
-    color: var(--primary-text-color);
-}
-.sample-content {
-    padding: 2rem;
-}
-.sample-content h4 {
-    font-size: 1.5rem;
-    color: var(--primary-text-color);
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent-color);
-    display: inline-block;
-}
-.sample-content p {
-    color: var(--secondary-text-color);
-    margin-bottom: 2rem;
-}
-
-/* Upgrade Nudge Box */
-.upgrade-nudge {
-    background-color: #fff9e6;
-    border: 1px solid #ffeccc;
-    border-left: 4px solid #ffc107;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-}
-.upgrade-nudge p {
-    margin: 0;
-    color: #856404;
-    font-size: 0.95rem;
-}
-.upgrade-nudge a {
-    color: #856404;
-    font-weight: 700;
-    text-decoration: underline;
-}
-
-/* Upsell Section */
-.upsell-section {
-    background-color: var(--card-bg-color);
-    text-align: center;
-    padding: 6rem 0;
-}
-.section-title-light {
-    color: var(--primary-text-color);
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-.section-title-light span {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-.upsell-subtext {
-    max-width: 700px;
+    color: var(--text-body); /* Softer gray */
+    max-width: 650px;
     margin: 0 auto 2.5rem auto;
-    color: var(--secondary-text-color);
-    font-size: 1.1rem;
 }
-
-/* Final CTA Buttons */
-.final-cta-buttons {
+.ads-page .hero-buttons {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
     flex-wrap: wrap;
 }
-.primary-cta {
-    background: var(--accent-gradient);
-    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+.ads-page .cta-button-ads {
+    padding: 0.9rem 2rem; /* Larger buttons */
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
-.secondary-cta {
-    background: #fff;
-    color: var(--accent-color);
-    border: 2px solid var(--accent-color);
+.ads-page .cta-button-ads.primary {
+    background-color: var(--accent-green);
+    color: var(--text-header);
+    border-color: var(--accent-green);
 }
-.secondary-cta:hover {
-    background: var(--accent-color);
-    color: #fff;
+.ads-page .cta-button-ads.primary:hover {
+    background-color: #059669;
+    border-color: #059669;
+}
+.ads-page .cta-button-ads.secondary {
+    background-color: transparent;
+    color: var(--text-header);
+    border-color: var(--border-dark);
+}
+.ads-page .cta-button-ads.secondary:hover {
+    background-color: var(--card-dark);
+    border-color: var(--card-dark);
+}
+/* Secondary button in light sections */
+.ads-page .ads-section .cta-button-ads.secondary {
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+.ads-page .ads-section .cta-button-ads.secondary:hover {
+    background-color: var(--accent-green);
+    color: var(--text-header);
+}
+
+/* 4. General Section Styling */
+.ads-page .ads-section {
+    padding: 6rem 0; /* Generous vertical spacing */
+    border-bottom: 1px solid var(--border-dark);
+}
+.ads-page .ads-section:last-of-type {
+    border-bottom: none;
+}
+.ads-page .section-title-ads {
+    font-size: 2.8rem; /* Larger */
+    text-align: center;
+    margin-bottom: 4rem; /* More space */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ads-page .section-title-ads.left-align {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    margin-bottom: 2.5rem;
+}
+/* Container for consistent content width */
+.ads-page .container {
+    max-width: 1280px; /* Constrains width */
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+
+/* 5. Plans Section */
+.ads-page .plans-grid-ads {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+.ads-page .plan-card-ads {
+    background-color: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+.ads-page .plan-card-ads:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-green);
+}
+.ads-page .plan-card-ads.featured {
+    border-color: var(--accent-green);
+    transform: scale(1.03); /* Pop effect */
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+.ads-page .featured-badge-ads {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--accent-green);
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transform: rotate(45deg) translate(25%, -10px);
+}
+.ads-page .plan-card-ads h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.ads-page .plan-card-ads .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: var(--accent-green);
+}
+.ads-page .plan-card-ads .price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-body);
+    font-family: 'Inter', sans-serif;
+}
+.ads-page .plan-card-ads .inclusive {
+    font-size: 0.9rem;
+    color: var(--text-body);
+    margin-bottom: 1.5rem;
+}
+.ads-page .features-list-ads {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+.ads-page .features-list-ads li {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-body);
+}
+.ads-page .features-list-ads li i {
+    color: var(--accent-green);
+    margin-top: 5px;
+}
+.ads-page .full-width {
+    width: 100%;
+    text-align: center;
+}
+/* Use primary button for featured plan */
+.ads-page .plan-card-ads.featured .cta-button-ads {
+    background-color: var(--accent-green);
+    color: var(--text-header);
+    border-color: var(--accent-green);
+}
+.ads-page .plan-card-ads.featured .cta-button-ads:hover {
+    background-color: #059669;
+    border-color: #059669;
+}
+
+/* 6. Case Study Section */
+.ads-page .case-study-section {
+    background-color: var(--card-dark); /* Darker background */
+}
+.ads-page .case-study-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* More space for content */
+    gap: 4rem;
+    align-items: center;
+}
+.ads-page .case-study-stats {
+    background-color: var(--bg-dark); /* Even darker card */
+    border-radius: 12px;
+    padding: 2.5rem;
+    border: 1px solid var(--border-dark);
+}
+.ads-page .case-study-stats h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+.ads-page .case-study-stats .client-name {
+    font-size: 1rem;
+    color: var(--accent-green);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+.ads-page .stat-card {
+    background-color: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+.ads-page .stat-card .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: var(--accent-green);
+    margin-bottom: 0;
+}
+.ads-page .stat-card .stat-label {
+    font-size: 1rem;
+    color: var(--text-body);
+    margin-bottom: 0;
+}
+.ads-page .stat-summary {
+    font-style: italic;
+    color: var(--text-header);
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+.ads-page .case-study-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+.ads-page .case-study-content blockquote {
+    border-left: 4px solid var(--accent-green);
+    padding-left: 1.5rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-header);
+}
+.ads-page .case-study-content blockquote footer {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--text-body);
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+/* 7. About Section */
+.ads-page .about-section {
+    background-color: var(--bg-dark);
+}
+.ads-page .about-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+.ads-page .about-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+.ads-page .about-guarantee {
+    background-color: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+}
+.ads-page .about-guarantee p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+}
+.ads-page .about-guarantee span {
+    font-weight: 500;
+    color: var(--accent-green);
+}
+
+/* 8. Reviews Section */
+.ads-page .reviews-grid-ads {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+.ads-page .review-card-ads {
+    background-color: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+}
+.ads-page .review-card-ads i {
+    font-size: 2rem;
+    color: var(--accent-green);
+    margin-bottom: 1.5rem;
+}
+.ads-page .review-card-ads p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: var(--text-header);
+}
+.ads-page .review-card-ads footer {
+    font-weight: 600;
+    color: var(--text-body);
+}
+
+/* 9. Ad Gallery Section */
+.ads-page .ad-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+.ads-page .ad-gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--border-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.ads-page .ad-gallery-grid img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 10. Final CTA Section */
+.ads-page .cta-section-ads {
+    background-color: var(--card-dark);
+    text-align: center;
+    border-bottom: none;
+    padding: 6rem 0;
+}
+.ads-page .cta-section-ads h2 {
+    font-size: 2.8rem;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+}
+.ads-page .cta-section-ads p {
+    color: var(--text-body);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+}
+.ads-page .cta-section-ads .cta-button-ads.secondary {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+.ads-page .cta-section-ads .cta-button-ads.secondary:hover {
+    background-color: var(--accent-green);
+    color: var(--text-header);
+}
+
+/* 11. Footer */
+.ads-page .dark-footer-ads {
+    background-color: var(--bg-dark);
+    color: var(--text-header);
+    padding: 4rem 0 2rem 0;
+    border-top: 1px solid var(--border-dark);
+}
+.ads-page .footer-layout-ads {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+.ads-page .footer-logo {
+    color: var(--text-header);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+.ads-page .footer-layout-ads p {
+    color: var(--text-body);
+}
+.ads-page .footer-links h4, .ads-page .footer-contact h4 {
+    font-size: 1.1rem;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+}
+.ads-page .footer-links ul {
+    list-style: none;
+}
+.ads-page .footer-links li a, .ads-page .footer-contact p a {
+    color: var(--text-body);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.ads-page .footer-links li {
+    margin-bottom: 0.5rem;
+}
+.ads-page .footer-links li a:hover, .ads-page .footer-contact p a:hover {
+    color: var(--text-header);
+}
+.ads-page .footer-bottom {
+    text-align: center;
+    border-top: 1px solid var(--border-dark);
+    padding-top: 2rem;
+}
+.ads-page .footer-bottom p {
+    margin: 0;
+    color: var(--text-body);
+    font-size: 0.9rem;
+}
+
+/* 12. Floating WhatsApp Button */
+.ads-page .wa-float-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #25D366;
+    color: var(--white);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+.ads-page .wa-float-button:hover {
+    transform: scale(1.1);
+}
+
+/* 13. Responsive Design */
+@media (max-width: 992px) {
+    .ads-page .plans-grid-ads,
+    .ads-page .reviews-grid-ads {
+        grid-template-columns: 1fr 1fr;
+    }
+    .ads-page .ad-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .ads-page .case-study-layout,
+    .ads-page .about-layout {
+        grid-template-columns: 1fr;
+    }
+    .ads-page .case-study-stats {
+        /* Re-order for mobile */
+        grid-row: 1;
+    }
+    .ads-page .footer-layout-ads {
+        grid-template-columns: 1fr;
+    }
+    .ads-page .ads-header .nav-links {
+        display: none; /* Hides nav links on tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .ads-page .hero-ads h1 {
+        font-size: 2.5rem;
+    }
+    .ads-page .section-title-ads,
+    .ads-page .cta-section-ads h2 {
+        font-size: 2rem;
+    }
+    .ads-page .plans-grid-ads,
+    .ads-page .reviews-grid-ads,
+    .ads-page .ad-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    .ads-page .plan-card-ads.featured {
+        transform: scale(1); /* Disable pop on mobile */
+    }
+    .ads-page .wa-float-button {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        bottom: 1rem;
+        right: 1rem;
+    }
+    .ads-page .container {
+        padding: 0 1rem; /* Tighter padding on mobile */
+    }
 }
