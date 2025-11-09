@@ -674,7 +674,6 @@ section {
 }
 
 /* --- [START] Pet Salon Page Styles --- */
-/* This is the missing code block */
 
 .pet-page {
     --bg-color: #FEFBF6; /* Creamy white background */
@@ -939,7 +938,7 @@ section {
 /* --- [END] Pet Salon Page Styles --- */
 
 
-/* --- Styles for Meta Ads Page --- */
+/* --- [START] Styles for Meta Ads Page --- */
 
 /* 1. Root Variables & Font Setup */
 .ads-page {
@@ -1351,24 +1350,7 @@ section {
     color: var(--text-body);
 }
 
-/* 9. Ad Gallery Section */
-.ads-page .ad-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-.ads-page .ad-gallery-grid img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 1px solid var(--border-dark);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.ads-page .ad-gallery-grid img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
+/* 9. Ad Gallery Section (REMOVED) */
 
 /* 10. Final CTA Section */
 .ads-page .cta-section-ads {
@@ -1524,4 +1506,3 @@ section {
         padding: 0 1rem; /* Tighter padding on mobile */
     }
 }
-
